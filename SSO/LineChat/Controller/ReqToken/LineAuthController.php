@@ -2,16 +2,16 @@
 
 namespace SSO\LineChat\Controller\ReqToken;
 
+use GuzzleHttp\Client as HttpClient;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterfaceFactory;
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
-use Magento\Framework\Controller\ResultFactory;
 use Magento\Customer\Model\CustomerFactory;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\Redirect;
-use GuzzleHttp\Client as HttpClient;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\UrlFactory;
 use Magento\Framework\UrlInterface;
@@ -104,7 +104,6 @@ class LineAuthController extends Action
             $resultRedirect->setPath('*/*/');
             return $resultRedirect;
         }
-
         $code = $this->getRequest()->getParam('code');
         // Request to endpoint token Line chat
         // Get access_token, id_token, verify line chat
@@ -119,7 +118,7 @@ class LineAuthController extends Action
             ],
         ]);
         // Request failed to do something ...
-        if ($response->getStatusCode() !== LineChat::RESPONSE_OK ) {
+        if ($response->getStatusCode() !== LineChat::RESPONSE_OK) {
             $this->messageManager->addErrorMessage('Login failed');
             return $resultRedirect->setUrl($this->_redirect->error($defaultUrl));
         }
@@ -136,7 +135,7 @@ class LineAuthController extends Action
             ],
         ]);
         // Request failed to do something ...
-        if ($response->getStatusCode() !== LineChat::RESPONSE_OK ) {
+        if ($response->getStatusCode() !== LineChat::RESPONSE_OK) {
             $this->messageManager->addErrorMessage('Login failed');
             return $resultRedirect->setUrl($this->_redirect->error($defaultUrl));
         }

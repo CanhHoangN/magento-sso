@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route url="/V1/training-basicmodule/employees" method="POST">
+		<service class="Training\BasicModule\Api\EmployeesRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Training_BasicModule::employees_save"/>
+		</resources>
+	</route>
+	<route url="/V1/training-basicmodule/employees/search" method="GET">
+		<service class="Training\BasicModule\Api\EmployeesRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Training_BasicModule::employees_view"/>
+		</resources>
+	</route>
+	<route url="/V1/training-basicmodule/employees/:employeesId" method="GET">
+		<service class="Training\BasicModule\Api\EmployeesRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Training_BasicModule::employees_view"/>
+		</resources>
+	</route>
+	<route url="/V1/training-basicmodule/employees/:employeesId" method="PUT">
+		<service class="Training\BasicModule\Api\EmployeesRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Training_BasicModule::employees_update"/>
+		</resources>
+	</route>
+	<route url="/V1/training-basicmodule/employees/:employeesId" method="DELETE">
+		<service class="Training\BasicModule\Api\EmployeesRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Training_BasicModule::employees_delete"/>
+		</resources>
+	</route>
+</routes>

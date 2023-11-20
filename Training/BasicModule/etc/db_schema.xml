@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="employees" resource="default" engine="innodb" comment="employees Table">
+        <column xsi:type="int" name="employees_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="employees_id"/>
+        </constraint>
+        <column name="employeeNumber" nullable="true" xsi:type="text" comment="employeeNumber"/>
+        <column name="lastName" nullable="true" xsi:type="text" comment="lastName"/>
+        <column name="firstName" nullable="true" xsi:type="text" comment="firstName"/>
+        <column name="email" nullable="true" xsi:type="text" comment="email"/>
+    </table>
+    <table name="employee_address" resource="default" engine="innodb" comment="employee_address Table">
+        <column xsi:type="int" name="address_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="address_id"/>
+        </constraint>
+        <column name="employees_id" nullable="true" xsi:type="int" comment="employees_id"/>
+        <column name="address" nullable="true" xsi:type="text" comment="address"/>
+    </table>
+</schema>
