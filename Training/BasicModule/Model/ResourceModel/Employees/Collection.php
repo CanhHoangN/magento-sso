@@ -27,5 +27,6 @@ class Collection extends AbstractCollection
             \Training\BasicModule\Model\ResourceModel\Employees::class
         );
     }
+
 }
 

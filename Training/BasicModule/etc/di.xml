@@ -22,4 +22,27 @@
             </argument>
         </arguments>
     </type>
+
+<!--    <virtualType name="Training\BasicModule\Model\ResourceModel\Employees\Demo\Collection"-->
+<!--                 type="Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection">-->
+<!--        <arguments>-->
+<!--            <argument name="resource" xsi:type="string">Training\BasicModule\Model\ResourceModel\Employees</argument>-->
+<!--        </arguments>-->
+<!--    </virtualType>-->
+
+    <virtualType name="Training\BasicModule\Model\ResourceModel\Employees\Demo\Collection"
+                 type="Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection">
+        <arguments>
+            <argument name="resource" xsi:type="object">Training\BasicModule\Model\ResourceModel\Employees</argument>
+        </arguments>
+    </virtualType>
+    <type name="Training\BasicModule\Controller\Adminhtml\Employees\Save">
+        <arguments>
+            <argument name="collection" xsi:type="object">Training\BasicModule\Model\ResourceModel\Employees\Demo\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Training\BasicModule\Controller\Adminhtml\Employees\Save">
+        <plugin name="training_basicmodule_save_plugin"
+                type="Training\BasicModule\Plugin\SavePlugin" />
+    </type>
 </config>

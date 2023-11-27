@@ -1,0 +1,24 @@
+{
+    "employees": {
+        "column": {
+            "employees_id": true,
+            "employeeNumber": true,
+            "lastName": true,
+            "firstName": true,
+            "email": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "employee_address": {
+        "column": {
+            "address_id": true,
+            "employees_id": true,
+            "address": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

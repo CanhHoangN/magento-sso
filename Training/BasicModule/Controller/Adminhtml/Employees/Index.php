@@ -6,7 +6,6 @@
 declare(strict_types=1);
 
 namespace Training\BasicModule\Controller\Adminhtml\Employees;
-
 class Index extends \Magento\Backend\App\Action
 {
 
@@ -34,8 +33,8 @@ class Index extends \Magento\Backend\App\Action
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-            $resultPage->getConfig()->getTitle()->prepend(__("employees"));
-            return $resultPage;
+        $resultPage->getConfig()->getTitle()->prepend(__("employees"));
+        return $resultPage;
     }
 }
 

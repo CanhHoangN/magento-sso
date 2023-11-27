@@ -8,11 +8,14 @@ declare(strict_types=1);
 namespace Training\BasicModule\Controller\Adminhtml\Employees;
 
 use Magento\Framework\Exception\LocalizedException;
+use Training\BasicModule\Model\Employees;
 
 class Save extends \Magento\Backend\App\Action
 {
 
     protected $dataPersistor;
+    protected $collection;
+    protected $employees;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
@@ -20,9 +23,11 @@ class Save extends \Magento\Backend\App\Action
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor
+        \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor,
+        \Magento\Framework\Data\Collection\AbstractDb $collection
     ) {
         $this->dataPersistor = $dataPersistor;
+        $this->collection = $collection;
         parent::__construct($context);
     }
 
@@ -38,20 +43,23 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPostValue();
         if ($data) {
             $id = $this->getRequest()->getParam('employees_id');
-        
-            $model = $this->_objectManager->create(\Training\BasicModule\Model\Employees::class)->load($id);
+            /**
+             * @var Employees $model
+             */
+            $model = $this->_objectManager->create(Employees::class)->load($id);
             if (!$model->getId() && $id) {
                 $this->messageManager->addErrorMessage(__('This Employees no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
             }
-        
             $model->setData($data);
-        
+
             try {
+                $this->employees->setEmail('abcxyz@gmail.com');
+                $model->getResource()->getEmployeeInfo();
                 $model->save();
                 $this->messageManager->addSuccessMessage(__('You saved the Employees.'));
                 $this->dataPersistor->clear('training_basicmodule_employees');
-        
+
                 if ($this->getRequest()->getParam('back')) {
                     return $resultRedirect->setPath('*/*/edit', ['employees_id' => $model->getId()]);
                 }
@@ -61,7 +69,7 @@ class Save extends \Magento\Backend\App\Action
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the Employees.'));
             }
-        
+
             $this->dataPersistor->set('training_basicmodule_employees', $data);
             return $resultRedirect->setPath('*/*/edit', ['employees_id' => $this->getRequest()->getParam('employees_id')]);
         }
